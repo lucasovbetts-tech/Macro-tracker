@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Macro Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+</head>
+<body>
+
+  <div class="Macros-vitamins">
+
+    <!-- ── DAY SELECTOR ── -->
+    <div class="container">
+      <div class="day"><label>Mon</label><input type="radio" name="day"></div>
+      <div class="day"><label>Tue</label><input type="radio" name="day"></div>
+      <div class="day"><label>Wed</label><input type="radio" name="day"></div>
+      <div class="day"><label>Thu</label><input type="radio" name="day"></div>
+      <div class="day"><label>Fri</label><input type="radio" name="day"></div>
+      <div class="day"><label>Sat</label><input type="radio" name="day"></div>
+      <div class="day"><label>Sun</label><input type="radio" name="day"></div>
+    </div>
+
+    <!-- ── CALORIE BLOCK ── -->
+    <div class="calorieBlock">
+      <div class="macroLimits">
+        <button onclick="macroEditButton()" id="macroEditBtn" aria-label="Edit macro limits">
+          <i class="ti ti-edit" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="label">
+        <p id="label">Calories: 0 /</p>
+        <span id="maxCalDisplay">2000kcal</span>
+      </div>
+      <div class="progressBar">
+        <div id="fillBar" class="fillBar"></div>
+      </div>
+    </div>
+
+    <!-- ── MACRO RINGS ── -->
+    <div class="macro-block">
+      <div class="macro">
+        <div id="fatRing" class="ring" style="--c: green; --p: 0;"></div>
+        <p><span id="totalFats">Fat: 0g</span> / <span id="maxFatDisplay">70g</span></p>
+      </div>
+      <div class="macro">
+        <div id="carbRing" class="ring" style="--c: yellow; --p: 0;"></div>
+        <p><span id="totalCarbs">Carbs: 0g</span> / <span id="maxCarbDisplay">200g</span></p>
+      </div>
+      <div class="macro">
+        <div id="protRing" class="ring" style="--c: blue; --p: 0;"></div>
+        <p><span id="totalProts">Protein: 0g</span> / <span id="maxProtDisplay">150g</span></p>
+      </div>
+    </div>
+
+    <!-- ── ADD BUTTON ── -->
+    <div class="addButton">
+      <button onclick="showMacros()" aria-label="Log macros">
+        <i class="ti ti-plus"></i>
+      </button>
+    </div>
+
+  </div><!-- /Macros-vitamins -->
+
+  <!-- ── FOOD LOG ── -->
+  <div id="foodContainer"></div>
+
+  <!-- ══════════════════════════════════════════
+       MACRO LIMITS POPUP
+  ══════════════════════════════════════════ -->
+  <div class="macroLimitPopUp" id="macroLimitPopUp" role="dialog" aria-labelledby="limitsTitle">
+    <div class="box">
+
+      <div class="popup-title">
+        <i class="ti ti-chart-donut-4" aria-hidden="true"></i>
+        <span id="limitsTitle">Daily macro limits</span>
+      </div>
+      <div class="divider"></div>
+
+      <div class="field-row">
+        <label class="field-label" for="maxCals">Calories</label>
+        <div class="input-unit">
+          <input id="maxCals" placeholder="e.g. 2000" type="number" min="0">
+          <span class="unit-badge">kcal</span>
+        </div>
+      </div>
+
+      <div class="fields-grid">
+        <div class="field-row">
+          <label class="field-label" for="maxProts">Protein</label>
+          <div class="input-unit">
+            <input id="maxProts" placeholder="e.g. 150" type="number" min="0">
+            <span class="unit-badge">g</span>
+          </div>
+        </div>
+        <div class="field-row">
+          <label class="field-label" for="maxCarbs">Carbs</label>
+          <div class="input-unit">
+            <input id="maxCarbs" placeholder="e.g. 200" type="number" min="0">
+            <span class="unit-badge">g</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <label class="field-label" for="maxFats">Fat</label>
+        <div class="input-unit">
+          <input id="maxFats" placeholder="e.g. 65" type="number" min="0">
+          <span class="unit-badge">g</span>
+        </div>
+      </div>
+
+      <button onclick="saveMacroLimits()">
+        Save limits
+        <i class="ti ti-square-rounded-check" aria-hidden="true"></i>
+      </button>
+      <span class="cancel-link" id="cancelBtn">Cancel</span>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MACRO ADDER POPUP
+  ══════════════════════════════════════════ -->
+  <div class="macroPage" id="macroPage" style="display: none;" role="dialog" aria-labelledby="logTitle">
+    <div class="popup-overlay">
+      <div class="card">
+
+        <button id="close-btn" class="close-btn" aria-label="Close">
+          <i class="ti ti-x" aria-hidden="true"></i>
+        </button>
+
+        <div class="card-header">
+          <div class="header-row">
+            <div class="icon-box">
+              <i class="ti ti-salad" aria-hidden="true"></i>
+            </div>
+            <h2 class="card-title" id="logTitle">Log macros</h2>
+          </div>
+          <p class="card-subtitle">Track your nutrition for today</p>
+        </div>
+
+        <div class="foodName">
+          <input class="food-name-input" id="food-name-input" type="text" placeholder="Food name…">
+        </div>
+
+        <div class="calories-box">
+          <label class="field-label" for="calories">
+            <i class="ti ti-flame calories-icon" aria-hidden="true"></i>Calories
+          </label>
+          <div class="calories-row">
+            <input id="calories" class="calories-input" type="number" min="0" placeholder="0">
+            <span class="unit">kcal</span>
+          </div>
+        </div>
+
+        <div class="macro-grid">
+          <div class="macro-box">
+            <label class="field-label" for="protein">
+              <i class="ti ti-meat protein-icon" aria-hidden="true"></i>Protein
+            </label>
+            <input id="protein" class="macro-input" type="number" min="0" placeholder="0">
+            <span class="unit-small">grams</span>
+          </div>
+          <div class="macro-box">
+            <label class="field-label" for="carbs">
+              <i class="ti ti-wheat carbs-icon" aria-hidden="true"></i>Carbs
+            </label>
+            <input id="carbs" class="macro-input" type="number" min="0" placeholder="0">
+            <span class="unit-small">grams</span>
+          </div>
+          <div class="macro-box">
+            <label class="field-label" for="fats">
+              <i class="ti ti-droplet fats-icon" aria-hidden="true"></i>Fats
+            </label>
+            <input id="fats" class="macro-input" type="number" min="0" placeholder="0">
+            <span class="unit-small">grams</span>
+          </div>
+        </div>
+
+        <div class="add-row">
+          <button id="add-btn" class="add-btn">
+            <i class="ti ti-plus" aria-hidden="true"></i>
+            Add macros
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="logic.js"></script>
+</body>
+</html>
