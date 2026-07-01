@@ -37,6 +37,32 @@ input::placeholder { color: #3d4090; }
 /* ============================================================
    DAY SELECTOR
    ============================================================ */
+.weekLabel {
+  text-align: center;
+  color: #B8C0FF;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  margin-bottom: 8px;
+}
+
+.weekArrow {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #B8C0FF;
+}
+.weekArrow:hover  { background-color: #2C2F8A; }
+.weekArrow:active { transform: scale(0.95); }
+
 .container {
   display: flex;
   gap: 1%;
@@ -46,6 +72,7 @@ input::placeholder { color: #3d4090; }
   border-radius: 20px;
   background-color: #0b0c58;
   color: #B8C0FF;
+  padding: 4px 6px;
 }
 
 .day {
@@ -55,26 +82,43 @@ input::placeholder { color: #3d4090; }
   align-items: center;
   flex: 1;
   min-width: 0;
+  cursor: pointer;
+}
+
+.dayDate {
+  font-size: 11px;
+  color: rgba(184, 192, 255, 0.5);
+  margin-top: 2px;
+}
+
+.day.isToday label {
+  color: #4DA3FF;
+  font-weight: 700;
+}
+.day.isToday .dayDate {
+  color: #4DA3FF;
 }
 
 input[type="radio"] {
+  --p: 0;
+  --c: orange;
   appearance: none;
-  width: 18px;
-  height: 18px;
-  border: 2px solid #3A3FA3;
+  width: 30px;
+  height: 30px;
+  margin-top: 4px;
   border-radius: 50%;
-  display: grid;
-  place-content: center;
+  border: 2px solid #1E1F6E;
+  cursor: pointer;
+  background: conic-gradient(var(--c) calc(var(--p) * 1%), #1E1F6E 0);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
-input[type="radio"]::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  transform: scale(0);
-  background: #3A3FA3;
+input[type="radio"]:hover {
+  border-color: #3A3FA3;
 }
-input[type="radio"]:checked::before { transform: scale(1); }
+input[type="radio"]:checked {
+  border-color: #4DA3FF;
+  box-shadow: 0 0 0 2px rgba(77, 163, 255, 0.35);
+}
 
 /* ============================================================
    CALORIE BLOCK

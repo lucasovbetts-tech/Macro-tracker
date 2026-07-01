@@ -12,14 +12,23 @@
   <div class="Macros-vitamins">
 
     <!-- ── DAY SELECTOR ── -->
-    <div class="container">
-      <div class="day"><label>Mon</label><input type="radio" name="day"></div>
-      <div class="day"><label>Tue</label><input type="radio" name="day"></div>
-      <div class="day"><label>Wed</label><input type="radio" name="day"></div>
-      <div class="day"><label>Thu</label><input type="radio" name="day"></div>
-      <div class="day"><label>Fri</label><input type="radio" name="day"></div>
-      <div class="day"><label>Sat</label><input type="radio" name="day"></div>
-      <div class="day"><label>Sun</label><input type="radio" name="day"></div>
+    <div class="weekLabel" id="weekLabel"></div>
+    <div class="container" id="dayContainer">
+      <button id="prevWeekBtn" class="weekArrow" aria-label="Previous week">
+        <i class="ti ti-chevron-left" aria-hidden="true"></i>
+      </button>
+
+      <div class="day"><label>Mon</label><span class="dayDate"></span><input type="radio" name="day"></div>
+      <div class="day"><label>Tue</label><span class="dayDate"></span><input type="radio" name="day"></div>
+      <div class="day"><label>Wed</label><span class="dayDate"></span><input type="radio" name="day"></div>
+      <div class="day"><label>Thu</label><span class="dayDate"></span><input type="radio" name="day"></div>
+      <div class="day"><label>Fri</label><span class="dayDate"></span><input type="radio" name="day"></div>
+      <div class="day"><label>Sat</label><span class="dayDate"></span><input type="radio" name="day"></div>
+      <div class="day"><label>Sun</label><span class="dayDate"></span><input type="radio" name="day"></div>
+
+      <button id="nextWeekBtn" class="weekArrow" aria-label="Next week">
+        <i class="ti ti-chevron-right" aria-hidden="true"></i>
+      </button>
     </div>
 
     <!-- ── CALORIE BLOCK ── -->
@@ -190,6 +199,86 @@
     </div>
   </div>
 
-  <script src="logic.js"></script>
+  <!-- ══════════════════════════════════════════
+       FOOD EDIT POPUP
+  ══════════════════════════════════════════ -->
+  <div class="macroPage" id="foodEditPage" style="display: none;" role="dialog" aria-labelledby="editTitle">
+    <div class="popup-overlay">
+      <div class="card">
+
+        <button id="close-edit-btn" class="close-btn" aria-label="Close">
+          <i class="ti ti-x" aria-hidden="true"></i>
+        </button>
+
+        <div class="card-header">
+          <div class="header-row">
+            <div class="icon-box">
+              <i class="ti ti-edit" aria-hidden="true"></i>
+            </div>
+            <h2 class="card-title" id="editTitle">Edit food</h2>
+          </div>
+          <p class="card-subtitle">Update the logged macros</p>
+        </div>
+
+        <div class="foodName">
+          <input class="food-name-input" id="edit-food-name-input" type="text" placeholder="Food name…">
+        </div>
+
+        <div class="calories-box">
+          <label class="field-label" for="edit-calories">
+            <i class="ti ti-flame calories-icon" aria-hidden="true"></i>Calories
+          </label>
+          <div class="calories-row">
+            <input id="edit-calories" class="calories-input" type="number" min="0" placeholder="0">
+            <span class="unit">kcal</span>
+          </div>
+        </div>
+
+        <div class="macro-grid">
+          <div class="macro-box">
+            <label class="field-label" for="edit-protein">
+              <i class="ti ti-meat protein-icon" aria-hidden="true"></i>Protein
+            </label>
+            <input id="edit-protein" class="macro-input" type="number" min="0" placeholder="0">
+            <span class="unit-small">grams</span>
+          </div>
+          <div class="macro-box">
+            <label class="field-label" for="edit-carbs">
+              <i class="ti ti-wheat carbs-icon" aria-hidden="true"></i>Carbs
+            </label>
+            <input id="edit-carbs" class="macro-input" type="number" min="0" placeholder="0">
+            <span class="unit-small">grams</span>
+          </div>
+          <div class="macro-box">
+            <label class="field-label" for="edit-fats">
+              <i class="ti ti-droplet fats-icon" aria-hidden="true"></i>Fats
+            </label>
+            <input id="edit-fats" class="macro-input" type="number" min="0" placeholder="0">
+            <span class="unit-small">grams</span>
+          </div>
+        </div>
+
+        <div class="add-row">
+          <button id="save-edit-btn" class="add-btn">
+            <i class="ti ti-square-rounded-check" aria-hidden="true"></i>
+            Save changes
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="js/dateHelpers.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/persistence.js"></script>
+  <script src="js/dom.js"></script>
+  <script src="js/helpers.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/daySelector.js"></script>
+  <script src="js/macroLimits.js"></script>
+  <script src="js/macroAdder.js"></script>
+  <script src="js/foodLog.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
