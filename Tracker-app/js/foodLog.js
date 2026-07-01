@@ -1,6 +1,12 @@
 // ============================================================
 //  FOOD LOG — DELETE
 // ============================================================
+import { dom } from "./dom.js";
+import { currentDay } from "./state.js";
+import { getInt } from "./helpers.js";
+import { saveState } from "./persistence.js";
+import { render } from "./render.js";
+
 function foodLogDel(id) {
   const day = currentDay();
   const food = day.foodList.find(f => f.id === id);
@@ -74,3 +80,5 @@ dom.saveEditBtn.addEventListener("click", () => {
   saveState();
   render();
 });
+
+export { foodLogDel, openFoodEditPopup };

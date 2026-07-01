@@ -6,6 +6,7 @@ const dom = {
   macroPage:      document.getElementById("macroPage"),
   closeMacroPage: document.getElementById("close-btn"),
   addMacrosBtn:   document.getElementById("add-btn"),
+  showMacrosBtn:  document.getElementById("showMacrosBtn"),
 
   // Inputs — macro adder
   calorieInput:  document.getElementById("calories"),
@@ -33,7 +34,9 @@ const dom = {
   fatRing:       document.getElementById("fatRing"),
 
   // Macro limits popup
+  macroEditBtn:    document.getElementById("macroEditBtn"),
   macroLimitPopUp: document.getElementById("macroLimitPopUp"),
+  saveLimitsBtn:   document.getElementById("saveLimitsBtn"),
   cancelBtn:       document.getElementById("cancelBtn"),
 
   // Limits inputs
@@ -62,3 +65,5 @@ const dom = {
   editCarbInput:     document.getElementById("edit-carbs"),
   editFatInput:      document.getElementById("edit-fats"),
 };
+
+export { dom };

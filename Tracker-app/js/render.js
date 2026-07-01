@@ -1,6 +1,11 @@
 // ============================================================
 //  RENDER
 // ============================================================
+import { dom } from "./dom.js";
+import { state, currentDay } from "./state.js";
+import { renderDaySelector } from "./daySelector.js";
+import { foodLogDel, openFoodEditPopup } from "./foodLog.js";
+
 function render() {
   const { totals } = currentDay();
   const { limits } = state;
@@ -63,3 +68,5 @@ function renderFoodLog() {
     dom.foodContainer.appendChild(box);
   }
 }
+
+export { render };

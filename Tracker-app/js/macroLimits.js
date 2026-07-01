@@ -1,6 +1,12 @@
 // ============================================================
 //  MACRO LIMITS POPUP
 // ============================================================
+import { dom } from "./dom.js";
+import { state } from "./state.js";
+import { getNum } from "./helpers.js";
+import { saveState } from "./persistence.js";
+import { render } from "./render.js";
+
 function macroEditButton() {
   dom.macroLimitPopUp.style.display = "flex";
 }
@@ -20,6 +26,9 @@ function saveMacroLimits() {
   saveState();
   render();
 }
+
+dom.macroEditBtn.addEventListener("click", macroEditButton);
+dom.saveLimitsBtn.addEventListener("click", saveMacroLimits);
 
 dom.cancelBtn.addEventListener("click", () => {
   dom.macroLimitPopUp.style.display = "none";

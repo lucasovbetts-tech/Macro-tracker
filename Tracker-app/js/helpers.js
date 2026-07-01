@@ -1,6 +1,8 @@
 // ============================================================
 //  HELPERS
 // ============================================================
+import { dom } from "./dom.js";
+
 function clearMacroInputs() {
   dom.calorieInput.value  = "";
   dom.protInput.value     = "";
@@ -16,3 +18,5 @@ function getInt(el) {
 function getNum(el) {
   return Number(el.value) || 0;
 }
+
+export { clearMacroInputs, getInt, getNum };

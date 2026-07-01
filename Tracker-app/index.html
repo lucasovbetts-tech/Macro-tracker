@@ -34,7 +34,7 @@
     <!-- ── CALORIE BLOCK ── -->
     <div class="calorieBlock">
       <div class="macroLimits">
-        <button onclick="macroEditButton()" id="macroEditBtn" aria-label="Edit macro limits">
+        <button id="macroEditBtn" aria-label="Edit macro limits">
           <i class="ti ti-edit" aria-hidden="true"></i>
         </button>
       </div>
@@ -65,7 +65,7 @@
 
     <!-- ── ADD BUTTON ── -->
     <div class="addButton">
-      <button onclick="showMacros()" aria-label="Log macros">
+      <button id="showMacrosBtn" aria-label="Log macros">
         <i class="ti ti-plus"></i>
       </button>
     </div>
@@ -120,7 +120,7 @@
         </div>
       </div>
 
-      <button onclick="saveMacroLimits()">
+      <button id="saveLimitsBtn">
         Save limits
         <i class="ti ti-square-rounded-check" aria-hidden="true"></i>
       </button>
@@ -269,16 +269,6 @@
     </div>
   </div>
 
-  <script src="js/dateHelpers.js"></script>
-  <script src="js/state.js"></script>
-  <script src="js/persistence.js"></script>
-  <script src="js/dom.js"></script>
-  <script src="js/helpers.js"></script>
-  <script src="js/render.js"></script>
-  <script src="js/daySelector.js"></script>
-  <script src="js/macroLimits.js"></script>
-  <script src="js/macroAdder.js"></script>
-  <script src="js/foodLog.js"></script>
-  <script src="js/main.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

@@ -1,9 +1,17 @@
 // ============================================================
 //  MACRO ADDER POPUP
 // ============================================================
+import { dom } from "./dom.js";
+import { state, currentDay } from "./state.js";
+import { getInt, clearMacroInputs } from "./helpers.js";
+import { saveState } from "./persistence.js";
+import { render } from "./render.js";
+
 function showMacros() {
   dom.macroPage.style.display = "flex";
 }
+
+dom.showMacrosBtn.addEventListener("click", showMacros);
 
 dom.closeMacroPage.addEventListener("click", () => {
   dom.macroPage.style.display = "none";
@@ -23,7 +31,7 @@ dom.addMacrosBtn.addEventListener("click", () => {
   day.totals.fats  += fats;
 
   day.foodList.push({
-    id: nextId++,
+    id: state.nextId++,
     name: dom.foodNameInput.value.trim() || "Unknown",
     cals, prots, carbs, fats,
   });

@@ -1,6 +1,8 @@
 // ============================================================
 //  PERSISTENCE
 // ============================================================
+import { state } from "./state.js";
+
 const STORAGE_KEY = "macroTrackerData";
 
 function loadState() {
@@ -18,3 +20,5 @@ function loadState() {
 function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify({ days: state.days, limits: state.limits }));
 }
+
+export { loadState, saveState };
